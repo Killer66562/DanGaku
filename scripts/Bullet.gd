@@ -10,11 +10,14 @@ var bigger_than: bool
 func _ready():
 	pass
 	
+	
+func _shoot_bullet():
+	pass
+
+
 func _process(delta):
 	position += velocity * speed * delta
-	if bigger_than:
-		if position.y > clear_y:
-			queue_free()
-	else:
-		if position.y < clear_y:
-			queue_free()
+	if bigger_than and position.y > clear_y:
+		queue_free()
+	elif not bigger_than and position.y < clear_y:
+		queue_free()
