@@ -9,5 +9,5 @@ func _ready():
 
 
 func _on_CollisionArea_area_entered(area):
-	if area.is_in_group("Enemy"):
+	if area.is_in_group("enemy"):
 		area.queue_free()

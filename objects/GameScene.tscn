@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/star_bg.jpg" type="Texture" id=1]
+[ext_resource path="res://objects/Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/GameScene.gd" type="Script" id=4]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 64, 128, 0, 0, 0, 0, 72, 112, 0, 0, 0, 0, 80, 104, 0, 0, 0, 0, 96, 104, 0, 0, 0, 0, 120, 96, 0, 0, 0, 0, 128, 120, 0, 0, 0, 0, 160, 128, 0, 0, 0, 0, 176, 88, 0, 0, 0, 0, 240, 80, 0, 0, 0, 0, 264, 104, 0, 0, 0, 0, 280, 128, 0, 0, 0, 0, 344, 120, 0, 0, 0, 0, 360, 96 )
+}
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource( 4 )
+Player = ExtResource( 3 )
+Mob = ExtResource( 2 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 1 )
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( 64, 128 )
+rotation = -1.10715
+
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
+[connection signal="die" from="Player" to="." method="_on_Player_die"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

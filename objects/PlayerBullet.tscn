@@ -1,8 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/PlayerBullet.gd" type="Script" id=2]
 
-[node name="PlayerBullet" instance=ExtResource( 1 )]
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.0
+
+[node name="PlayerBullet" groups=[
+"player",
+] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="CollisionArea" parent="." index="1" groups=[
+"player",
+]]
+
+[node name="CollisionShape2D" parent="CollisionArea" index="0"]
+shape = SubResource( 1 )
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]

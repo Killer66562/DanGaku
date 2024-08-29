@@ -3,7 +3,7 @@ extends "res://scripts/Character.gd"
 
 signal use_skill
 
-var _health: int
+var _health: int = 10
 var _skill_count_remain: int = 10
 var _skill_active: bool = false
 var _skill_lasting_sec: float = 3.5
@@ -13,7 +13,6 @@ export (PackedScene) var PlayerBullet
 
 func _ready():
 	bullet_cooldown = 0.1
-	pass # Replace with function body.
 	
 	
 func _shoot_bullet():
@@ -56,7 +55,7 @@ func _process(delta):
 func _on_Player_use_skill():
 	skill_active = true
 	$SkillTimer.start(_skill_lasting_sec)
-	bullet_speed = 1200
+	bullet_speed = 600
 
 
 func _on_SkillArea_area_entered(area):
@@ -74,6 +73,11 @@ func _on_SkillTimer_timeout():
 
 func _on_CollisionArea_area_entered(area):
 	if area.is_in_group("enemy"):
+		print("Enemy entered!")
 		_health -= 1
 		if _health <= 0:
 			emit_signal("die")
+
+
+func _on_CollisionArea_body_entered(body):
+	pass

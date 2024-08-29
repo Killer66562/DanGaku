@@ -7,7 +7,7 @@ export var speed = 400
 export var skill_active = false
 
 var screen_size;
-var bullet_speed = 1000
+var bullet_speed = 800
 
 export var bullet_cooldown: float
 var bullet_timer_timeout = true
