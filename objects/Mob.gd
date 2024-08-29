@@ -3,10 +3,12 @@ extends "res://scripts/Character.gd"
 
 export (PackedScene) var PlayerBullet
 export (PackedScene) var MobBullet
+export (PackedScene) var Item
 
 
 var _move_to: Vector2
 var player_position: Vector2
+var item_drop_chance: float = 0.99
 
 
 func _shoot_bullet():
@@ -16,6 +18,16 @@ func _shoot_bullet():
 	bullet.velocity = velocity
 	bullet.speed = bullet_speed
 	get_tree().root.add_child(bullet)
+	
+	
+func _drop_item():
+	if randf() < item_drop_chance:
+		var velocity = Vector2(0, 1).normalized()
+		var item = Item.instance()
+		item.position = position
+		item.velocity = velocity
+		item.speed = 200
+		get_tree().root.add_child(item)
 
 
 func _ready():
@@ -36,6 +48,7 @@ func _process(delta):
 
 func _on_CollisionArea_area_entered(area):
 	if area.is_in_group("player"):
+		_drop_item()
 		queue_free()
 
 

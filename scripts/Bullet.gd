@@ -17,7 +17,7 @@ func _shoot_bullet():
 
 func _process(delta):
 	position += velocity * speed * delta
-	if bigger_than and position.y > clear_y:
-		queue_free()
-	elif not bigger_than and position.y < clear_y:
-		queue_free()
+
+
+func _on_DisappearTimer_timeout():
+	queue_free()

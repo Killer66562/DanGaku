@@ -4,6 +4,7 @@ extends "res://scripts/Character.gd"
 signal use_skill
 
 var _health: int = 10
+var _strength: int = 0
 var _skill_count_remain: int = 10
 var _skill_active: bool = false
 var _skill_lasting_sec: float = 3.5

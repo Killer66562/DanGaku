@@ -6,6 +6,7 @@ export (PackedScene) var Mob
 
 
 func _ready():
+	randomize()
 	$Player.position = Vector2(400, 400)
 	$MobTimer.start()
 
